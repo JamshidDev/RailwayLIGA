@@ -1,15 +1,20 @@
-import { webhookCallback } from "grammy"
+// import { webhookCallback } from "grammy"
 import express from "express"
 import cors from 'cors';
-import {bot,token} from "./telegram-bot/bot.js"
+import path from 'path';
+import { fileURLToPath } from 'url';
+// import {bot,token} from "./telegram-bot/bot.js"
 import "./config/mongodb.js";
 // import "./telegram-bot/modules/migrationModule.js"
+
+
 
 import permissionRouter from "./router/permissionRouter.js";
 import roleRouter from "./router/roleRouter.js";
 import menuRouteRouter from "./router/menuRouteRouter.js";
 import menuRouter from "./router/menuRouter.js";
 import organizationRouter from "./router/organizationRouter.js";
+import {teamRouter, tournamentRouter, matchRouter} from "./router/index.js"
 
 
 
@@ -25,6 +30,15 @@ app.use("/role",roleRouter);
 app.use("/route",menuRouteRouter);
 app.use("/menu",menuRouter);
 app.use("/organization",organizationRouter);
+app.use("/team",teamRouter)
+app.use("/tournament",tournamentRouter)
+app.use("/match",matchRouter)
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use('/public', express.static(path.join(__dirname, './public/photo')));
 
 
 
@@ -36,7 +50,7 @@ app.use("/organization",organizationRouter);
 
 
 
-app.use(`/${token}`, webhookCallback(bot, 'express'))
+// app.use(`/${token}`, webhookCallback(bot, 'express'))
 
 
 const port = process.env.PORT;
