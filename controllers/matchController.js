@@ -127,3 +127,4 @@ const remove = async(req,res)=>{
 
 
 export const matchController = {store,index,update, remove}
+

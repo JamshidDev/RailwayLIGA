@@ -3,9 +3,7 @@ import express from "express"
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import {bot,token} from "./telegram-bot/bot.js"
 import "./config/mongodb.js";
-// import "./telegram-bot/modules/migrationModule.js"
 
 
 
@@ -14,7 +12,7 @@ import roleRouter from "./router/roleRouter.js";
 import menuRouteRouter from "./router/menuRouteRouter.js";
 import menuRouter from "./router/menuRouter.js";
 import organizationRouter from "./router/organizationRouter.js";
-import {teamRouter, tournamentRouter, matchRouter} from "./router/index.js"
+import {teamRouter, tournamentRouter, matchRouter, appRouter} from "./router/index.js"
 
 
 
@@ -32,7 +30,8 @@ app.use("/menu",menuRouter);
 app.use("/organization",organizationRouter);
 app.use("/team",teamRouter)
 app.use("/tournament",tournamentRouter)
-app.use("/match",matchRouter)
+app.use("/match", matchRouter)
+app.use("/api", appRouter)
 
 
 const __filename = fileURLToPath(import.meta.url);
